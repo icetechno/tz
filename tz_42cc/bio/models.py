@@ -13,4 +13,14 @@ class Person(models.Model):
                             verbose_name = 'Biography')  
     contacts =  models.CharField(max_length = 255,
                             blank = False,
-                            verbose_name = 'Contacts') 
+                            verbose_name = 'Contacts')
+    
+    
+class HttpRequestData(models.Model):
+    path =  models.TextField()
+    method = models.CharField()
+    request = models.TextField()
+    cookies = models.TextField(blank = True) 
+    meta = models.TextField()
+    user = models.TextField(blank = True)
+    date = models.DateTimeField(auto_now_add = True)
