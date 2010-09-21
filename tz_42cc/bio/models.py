@@ -18,7 +18,7 @@ class Person(models.Model):
     
 class HttpRequestData(models.Model):
     path =  models.TextField()
-    method = models.CharField()
+    method = models.CharField(max_length = 5)
     request = models.TextField()
     cookies = models.TextField(blank = True) 
     meta = models.TextField()
