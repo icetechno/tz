@@ -9,3 +9,9 @@
 {% else %}
     <p>Database empty =(</p>
 {% endif %}
+{% if user.is_authenticated %}
+   	<div>
+		<a href="/logout/">Log out</a>
+	</div>
+{% endif %}
+<a href="/bio/edit/">Edit</a>
