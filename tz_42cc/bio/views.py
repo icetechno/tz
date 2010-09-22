@@ -6,6 +6,10 @@ from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from tz_42cc.bio.context_processor import get_settings
 
+
+def start_page(request):
+    return render_to_response('links.html', {})
+
 def index(request):
     persons_data = Person.objects.all()
     return render_to_response('bio/index.html', {'persons_data': persons_data})

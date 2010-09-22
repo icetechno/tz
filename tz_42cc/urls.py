@@ -4,7 +4,7 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
-from tz_42cc.bio.views import logout_user, settings
+from tz_42cc.bio.views import start_page, logout_user, settings
 
 urlpatterns = patterns('',
     # Example:
@@ -12,7 +12,7 @@ urlpatterns = patterns('',
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
+    (r'^$', start_page),
     (r'^bio/', include('tz_42cc.bio.urls')),
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
