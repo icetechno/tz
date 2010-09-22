@@ -4,7 +4,7 @@ from django.conf.urls.defaults import *
 from django.contrib import admin
 admin.autodiscover()
 
-from tz_42cc.bio.views import start_page, logout_user, settings
+from tz_42cc.bio.views import start_page, logout_user, settings, test_tag
 
 urlpatterns = patterns('',
     # Example:
@@ -19,4 +19,5 @@ urlpatterns = patterns('',
     (r'^accounts/login/$', 'django.contrib.auth.views.login'),
     (r'^logout/$', logout_user),
     (r'^settings/$', settings),
+    (r'^test_tag/$', test_tag),
 )
