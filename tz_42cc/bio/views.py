@@ -17,11 +17,10 @@ def index(request):
 
 @login_required
 def edit_person(request):
-    form = PersonForm() #empty form from model
-    if request.method == 'GET':     #view for edit
-        form = PersonForm(instance = Person.objects.all()[0]) #first person in DB
-    elif request.method == 'POST':  #recived post data to save  
-        form = PersonForm(request.POST) #load post data into object
+    first_person = Person.objects.all()[0]  #first person in DB       
+    form = PersonForm(instance = first_person) 
+    if request.method == 'POST':  #recived post data to save  
+        form = PersonForm(request.POST, instance = first_person) #load post data into object
         if form.is_valid(): #if form data are valid
             form.save()     #save data from object to DB
         else: # form data not valid
