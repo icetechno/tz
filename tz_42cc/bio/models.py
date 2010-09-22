@@ -13,7 +13,9 @@ class Person(models.Model):
                             verbose_name = 'Biography')  
     contacts =  models.CharField(max_length = 255,
                             blank = False,
-                            verbose_name = 'Contacts')
+                            verbose_name = 'Contacts')    
+    birthdate =  models.DateField(verbose_name = 'Birth date',
+                            blank = True)
     
     
 class HttpRequestData(models.Model):
