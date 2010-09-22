@@ -17,7 +17,7 @@ def index(request):
 @login_required
 def edit_person(request):
     persons_data = Person.objects.all()
-    return render_to_response('bio/index.html', 
+    return render_to_response('bio/edit.html', 
                               {'persons_data': persons_data},
                               context_instance=RequestContext(request))
 
