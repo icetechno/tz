@@ -6,7 +6,9 @@ from django.forms.extras.widgets import SelectDateWidget
 # Create the form class.
 class PersonForm(ModelForm):   
     birthdate = forms.DateField(widget=SelectDateWidget())
+    def __init__(self, *args, **kw): 
+        super(ModelForm, self).__init__(*args, **kw)
+        self.fields.keyOrder.reverse() 
     
     class Meta:
         model = Person
-        fields = ['birthdate', 'contacts', 'bio', 'surname', 'name']

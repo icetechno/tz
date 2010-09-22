@@ -17,7 +17,6 @@ class Person(models.Model):
     birthdate =  models.DateField(verbose_name = 'Birth date',
                             blank = True)
     
-    
 class HttpRequestData(models.Model):
     path =  models.TextField()
     method = models.CharField(max_length = 5)
