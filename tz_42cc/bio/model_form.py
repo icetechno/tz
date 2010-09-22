@@ -9,4 +9,4 @@ class PersonForm(ModelForm):
     
     class Meta:
         model = Person
-    
+        fields = ['birthdate', 'contacts', 'bio', 'surname', 'name']
