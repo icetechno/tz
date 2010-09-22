@@ -98,3 +98,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'tz_42cc.bio',
 )
+
+FIXTURE_DIRS = (
+   '/var/test/tz/fixtures',
+)
