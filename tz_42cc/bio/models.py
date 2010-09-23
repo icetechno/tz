@@ -28,9 +28,22 @@ class HttpRequestData(models.Model):
     user = models.TextField(blank = True)
     date = models.DateTimeField(auto_now_add = True)
     
-def my_callback(sender, **kwargs):
-    print "Request finished!"
+class SignalLog(models.Model):
+    souce = models.CharField(max_length = 254)
+    type = models.CharField(max_length = 15)
     
-post_init.connect(my_callback)
-post_save.connect(my_callback)
-post_delete.connect(my_callback)    
+def my_callback(sender, **kwargs):
+    if sender == SignalLog:             #don`t log self
+        return
+    
+    try:
+        signal = kwargs.get('signal')   #get signal from kwargs arguments
+        action = signal.__dict__['receivers'][0][0][0]  #get dispatch_uid if present
+    except:
+        action = 'can`t detect'        
+    signal_log = SignalLog(souce = str(sender), type = action)
+    signal_log.save()    
+    
+post_init.connect(my_callback, dispatch_uid='init')
+post_save.connect(my_callback, dispatch_uid='save')
+post_delete.connect(my_callback, dispatch_uid='delete')    
