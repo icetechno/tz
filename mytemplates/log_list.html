@@ -8,14 +8,16 @@
 {% if log_list %}
     <table border = '1'>
     <tr>
-		<td>path</td>
-		<td>method</td>
-		<td>request</td>
-		<td>Meta information</td>
-		<td width = '10%'>date</td>
+    	<td>ID <a href ='/loglist?order=id' >priority1</a> <a href ='/loglist?order=-id' >priority0</a></td>
+		<td>path <a href ='/loglist?order=path' >priority1</a> <a href ='/loglist?order=-path' >priority0</a></td>
+		<td>method <a href ='/loglist?order=method' >priority1</a> <a href ='/loglist?order=-method' >priority0</a></td>
+		<td>request <a href ='/loglist?order=request' >priority1</a> <a href ='/loglist?order=-request' >priority0</a></td>
+		<td>Meta information <a href ='/loglist?order=meta' >priority1</a> <a href ='/loglist?order=-meta' >priority0</a></td>
+		<td width = '10%'>date <a href ='/loglist?order=date' >priority1</a> <a href ='/loglist?order=-date' >priority0</a></td>
 	</tr>
     {% for record in log_list %}
 	<tr>
+		<td>{{ record.pk }}</td>
 		<td>{{ record.path }}</td>
 		<td>{{ record.method }}</td>
 		<td>{{ record.request }}</td>

@@ -42,5 +42,9 @@ def test_tag(request):
     return render_to_response('test_tag.html', {'request': request}, context_instance = RequestContext(request))
 
 def loglist(request):
-    log_list = HttpRequestData.objects.all()[:10]
+    if request.REQUEST.has_key('order'):
+        order = request.REQUEST['order']
+        log_list = HttpRequestData.objects.order_by(order)[:10]
+    else:
+        log_list = HttpRequestData.objects.all()[:10]
     return render_to_response('log_list.html', {'log_list' : log_list})
