@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>view logs</title>
+</head>
+<body>
+{% if log_list %}
+    <table border = '1'>
+    <tr>
+		<td>path</td>
+		<td>method</td>
+		<td>request</td>
+		<td>Meta information</td>
+		<td width = '10%'>date</td>
+	</tr>
+    {% for record in log_list %}
+	<tr>
+		<td>{{ record.path }}</td>
+		<td>{{ record.method }}</td>
+		<td>{{ record.request }}</td>
+		<td>{{ record.meta }}</td>
+		<td>{{ record.date }}</td>
+	</tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>no logs found</p>
+{% endif %}
+</body>
+</html>
