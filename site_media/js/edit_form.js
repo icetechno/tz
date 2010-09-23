@@ -17,24 +17,28 @@ $(document).ready(function() {
  
     // bind form using 'ajaxForm' 
     $('#editForm').ajaxForm(options); 
+    enableForm();
 }); 
 
 function disableElem(index) {
 	$(this).attr('disabled', 'true');
 }
 
-//function enableElem(index) {
-//	$(this).attr('disabled', 'false');
-//}
+function enableElem(index) {
+	$(this).attr('disabled', '');
+}
 
 //pre-submit callback 
 function disableForm(formData, jqForm, options) {
 	$('#editForm').find('select').each(disableElem);
 	$('#editForm').find('input').each(disableElem);
 	$('#editForm').find('textarea').each(disableElem);
+	$('#progress').show();
 } 
  
 // post-submit callback 
 function enableForm(responseText, statusText, xhr, $form)  {
-	//alert('enable');
+	$('#editForm').find('select').each(enableElem);
+	$('#editForm').find('input').each(enableElem);
+	$('#editForm').find('textarea').each(enableElem);
 } 
