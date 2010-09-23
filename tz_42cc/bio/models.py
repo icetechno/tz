@@ -1,4 +1,6 @@
 from django.db import models
+#imports for signal dispatcher
+from django.db.models.signals import post_init, post_save, post_delete
 
 #That class represents a person
 class Person(models.Model):
@@ -25,3 +27,10 @@ class HttpRequestData(models.Model):
     meta = models.TextField()
     user = models.TextField(blank = True)
     date = models.DateTimeField(auto_now_add = True)
+    
+def my_callback(sender, **kwargs):
+    print "Request finished!"
+    
+post_init.connect(my_callback)
+post_save.connect(my_callback)
+post_delete.connect(my_callback)    
