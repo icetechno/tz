@@ -5,7 +5,7 @@ from django.conf import settings as django_settings
 from django.contrib import admin
 admin.autodiscover()
 
-from tz_42cc.bio.views import start_page, logout_user, settings, test_tag
+from tz_42cc.bio.views import start_page, logout_user, settings, test_tag, loglist
 
 urlpatterns = patterns('',
     # Example:
@@ -21,5 +21,6 @@ urlpatterns = patterns('',
     (r'^logout/$', logout_user),
     (r'^settings/$', settings),
     (r'^test_tag/$', test_tag),
+    (r'^loglist/$', loglist),
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': django_settings.MEDIA_ROOT}),    
 )

@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from tz_42cc.bio.models import Person
+from tz_42cc.bio.models import Person, HttpRequestData
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.contrib.auth import logout
@@ -40,3 +40,7 @@ def settings(request):
 
 def test_tag(request):
     return render_to_response('test_tag.html', {'request': request}, context_instance = RequestContext(request))
+
+def loglist(request):
+    log_list = HttpRequestData.objects.all()[:10]
+    return render_to_response('log_list.html', {'log_list' : log_list})
