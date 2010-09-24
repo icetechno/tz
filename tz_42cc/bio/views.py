@@ -32,7 +32,7 @@ def edit_person(request):
 
 def logout_user(request):
     logout(request)
-    return HttpResponseRedirect('/bio')
+    return HttpResponseRedirect('/')
 
 def settings(request):
     context = RequestContext(request, {}, [get_settings])
