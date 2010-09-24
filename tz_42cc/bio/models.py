@@ -19,6 +19,9 @@ class Person(models.Model):
                             verbose_name = u'Контакты:')
     birthdate =  models.DateField(verbose_name = u'Дата рождения:',
                             blank = True)
+ 
+    def __unicode__(self):
+        return u'%s %s' % (self.name, self.surname)
 
     
 class HttpRequestData(models.Model):
@@ -48,4 +51,4 @@ def my_callback(sender, **kwargs):
     
 post_init.connect(my_callback, dispatch_uid='init')
 post_save.connect(my_callback, dispatch_uid='save')
-post_delete.connect(my_callback, dispatch_uid='delete')    
+post_delete.connect(my_callback, dispatch_uid='delete')

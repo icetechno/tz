@@ -7,13 +7,12 @@ from django.http import HttpResponseRedirect
 from context_processor import get_settings
 from model_form import PersonDetail, PersonForm
 
-def start_page(request):
-    return render_to_response('links.html', {})
-
 def index(request):
     first_person = Person.objects.all()[0]  #first person in DB       
     form = PersonDetail(instance = first_person)     
-    return render_to_response('bio/index.html', {'form': form})
+    return render_to_response('bio/index.html', 
+                        {'form': form}, 
+                        context_instance = RequestContext(request))
 
 @login_required
 def edit_person(request):
