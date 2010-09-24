@@ -1,10 +1,12 @@
 from django.conf.urls.defaults import *
+from tz_42cc.bio.views import start_page
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^$', start_page),                       
     # Example:
     # (r'^tz_42cc/', include('tz_42cc.foo.urls')),
 
