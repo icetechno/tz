@@ -1,19 +1,19 @@
 from django.shortcuts import render_to_response
-from tz_42cc.bio.models import Person, HttpRequestData
+from models import Person, HttpRequestData
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
-from tz_42cc.bio.context_processor import get_settings
-from tz_42cc.bio.model_form import PersonForm
-
+from context_processor import get_settings
+from model_form import PersonDetail, PersonForm
 
 def start_page(request):
     return render_to_response('links.html', {})
 
 def index(request):
-    persons_data = Person.objects.all()
-    return render_to_response('bio/index.html', {'persons_data': persons_data})
+    first_person = Person.objects.all()[0]  #first person in DB       
+    form = PersonDetail(instance = first_person)     
+    return render_to_response('bio/index.html', {'form': form})
 
 @login_required
 def edit_person(request):

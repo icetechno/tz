@@ -1,1 +1,2 @@
-[{"pk": 1, "model": "bio.person", "fields": {"bio": "\u0431\u0438\u043e\u0433\u0440\u0430\u0444\u0438\u044f", "surname": "\u041c\u0430\u0442\u0432\u0438\u044e\u043a", "name": "\u0410\u043d\u0434\u0440\u0435\u0439 ", "birthdate": "1983-06-24", "contacts": "\u043a\u043e\u043d\u0442\u0430\u043a\u0442\u044b"}}]
+[{"pk": 1, "model": "bio.person", "fields": {"bio": "\u0431\u0438\u043e\u0433\u0440\u0430\u0444\u0438\u044f", "surname": "\u041c\u0430\u0442\u0432\u0438\u044e\u043a", "name": "\u0410\u043d\u0434\u0440\u0435\u0439 ", "birthdate": "1983-06-24", "contacts": "icetechno@mail.ru +380974865577"}}]
+
