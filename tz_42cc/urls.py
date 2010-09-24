@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from tz_42cc.bio.views import start_page
+from bio.views import start_page
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin

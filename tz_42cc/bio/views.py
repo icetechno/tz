@@ -7,9 +7,5 @@ def index(request):
     form = PersonDetail(instance = first_person)     
     return render_to_response('bio/index.html', {'form': form})
 
-    
-    persons_data = Person.objects.all()
-    return render_to_response('bio/index.html', {'persons_data': persons_data})
-
 def start_page(request):
     return render_to_response('links.html', {})
