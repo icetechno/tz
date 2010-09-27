@@ -17,7 +17,7 @@ class Person(models.Model):
                             blank = False,
                             verbose_name = u'Контакты:')
     birthdate =  models.DateField(verbose_name = u'Дата рождения:',
-                            blank = True)
+                            blank = False)
  
     def __unicode__(self):
         return u'%s %s' % (self.name, self.surname)
