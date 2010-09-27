@@ -7,7 +7,6 @@ from django.http import HttpResponseRedirect
 from context_processor import get_settings
 from model_form import PersonDetail, PersonForm
 
-
 def start_page(request):
     return render_to_response('links.html',
                         {},

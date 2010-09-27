@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.test.client import Client
-from models import Person
+from models import Person, HttpRequestData
 from model_form import PersonDetail
 from zlib import crc32
 
@@ -24,4 +24,11 @@ class BioTest(TestCase):
         # Check that renders fine
         self.failUnlessEqual(external_view, internal_view, 'internal and external wiew are not equal')
         
-
+#Ticket3
+class HttpRequestLogTest(TestCase):
+    def loopback(self):
+        self.client.get('/?key=value')
+        log_data_obj = HttpRequestData.objects.filter(path = '/')
+        self.failIf(log_data_obj.count() == 0, 'http requests not stored in the DB')
+        self.failUnlessEqual(log_data_obj[0].request, u"<QueryDict: {u'key': [u'value']}>", 'http requests data not stored in the DB correctly')
+        

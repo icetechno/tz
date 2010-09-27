@@ -2,9 +2,8 @@ from django.conf.urls.defaults import *
 from django.conf import settings as django_settings
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-admin.autodiscover()
-
 from bio.views import start_page, logout_user, settings, test_tag, loglist
+admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^$', start_page),                       

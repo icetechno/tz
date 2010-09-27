@@ -23,7 +23,6 @@ class Person(models.Model):
     def __unicode__(self):
         return u'%s %s' % (self.name, self.surname)
 
-    
 class HttpRequestData(models.Model):
     path =  models.TextField()
     method = models.CharField(max_length = 5)
