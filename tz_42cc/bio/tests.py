@@ -3,6 +3,7 @@ from django.test.client import Client
 from models import Person, HttpRequestData
 from model_form import PersonDetail
 from zlib import crc32
+from django.conf import settings
 
 #Ticket1
 class BioTest(TestCase):
@@ -31,4 +32,9 @@ class HttpRequestLogTest(TestCase):
         log_data_obj = HttpRequestData.objects.filter(path = '/')
         self.failIf(log_data_obj.count() == 0, 'http requests not stored in the DB')
         self.failUnlessEqual(log_data_obj[0].request, u"<QueryDict: {u'key': [u'value']}>", 'http requests data not stored in the DB correctly')
-        
+
+#Ticket4
+class ContextProcessorTest(TestCase):
+    def loopback(self):
+        response = self.client.get('/settings/')
+        self.failUnlessEqual(response.context['settings']['SECRET_KEY'], settings.SECRET_KEY)        
