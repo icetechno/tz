@@ -1,16 +1,11 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html lang="en">
-<head>
-    <title>edit page</title>
-</head>
-<body>
-    <h3>edit person</h3>
-    <form action="/bio/edit/" method="POST">
-    	{% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-        <p><input type="submit" value="Submit"></p>
-    </form>
-</body>
-</html>
+{% extends "base_generic.html" %} 
+{% block title %}edit page{% endblock%}
+{% block content %}
+<h3>edit person</h3>
+<form action="/bio/edit/" method="POST">{% csrf_token %}
+	<table>
+		{{ form.as_table }}
+	</table>
+<p><input type="submit" value="Submit"></p>
+</form>
+{% endblock %}
