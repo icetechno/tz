@@ -1,5 +1,12 @@
-{% extends "base_generic.html" %} 
-{% block title %}edit page{% endblock%}
+{% extends "base_generic.html" %}
+{% block title %}edit page{% endblock %} 
+	{% block js %}
+		<script type="text/javascript">window.__admin_media_prefix__ = "/media/";</script>	   
+   		<script type="text/javascript" src="/admin/jsi18n/"></script>
+		<script type="text/javascript" src="/media/js/core.js"></script>
+		<script type="text/javascript" src="/media/js/calendar.js"></script>
+		<script type="text/javascript" src="/media/js/admin/DateTimeShortcuts.js"></script>
+	{% endblock %} 
 {% block content %}
 <h3>edit person</h3>
 <form action="/bio/edit/" method="POST">{% csrf_token %}
