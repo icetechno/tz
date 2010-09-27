@@ -1,21 +1,27 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 
 #That class represents a person
 class Person(models.Model):
     name =      models.CharField(max_length = 255,
                             blank = False,
-                            verbose_name = 'Name')  
+                            verbose_name = u'Имя:')  
     surname =   models.CharField(max_length = 255,
                             blank = False,
-                            verbose_name = 'Surname')    
+                            verbose_name = u'Фамилия:')    
     bio =       models.TextField(max_length = 255,
                             blank = True,
-                            verbose_name = 'Biography')  
+                            verbose_name = u'Биография:')  
     contacts =  models.CharField(max_length = 255,
                             blank = False,
-                            verbose_name = 'Contacts')
-    
-    
+                            verbose_name = u'Контакты:')
+    birthdate =  models.DateField(verbose_name = u'Дата рождения:',
+                            blank = True)
+ 
+    def __unicode__(self):
+        return u'%s %s' % (self.name, self.surname)
+           
 class HttpRequestData(models.Model):
     path =  models.TextField()
     method = models.CharField(max_length = 5)

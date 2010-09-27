@@ -1,12 +1,14 @@
 from django.conf.urls.defaults import *
+from bio.views import start_page
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
-from tz_42cc.bio.views import logout_user, settings
+from bio.views import settings
 
 urlpatterns = patterns('',
+    (r'^$', start_page),                       
     # Example:
     # (r'^tz_42cc/', include('tz_42cc.foo.urls')),
 
@@ -16,7 +18,5 @@ urlpatterns = patterns('',
     (r'^bio/', include('tz_42cc.bio.urls')),
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
-    (r'^accounts/login/$', 'django.contrib.auth.views.login'),
-    (r'^logout/$', logout_user),
     (r'^settings/$', settings),
 )
