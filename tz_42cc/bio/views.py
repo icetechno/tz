@@ -1,11 +1,11 @@
 from django.shortcuts import render_to_response
 from models import Person, HttpRequestData
-from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from context_processor import get_settings
 from model_form import PersonDetail, PersonForm
+from django.contrib.auth.decorators import login_required
 
 def start_page(request):
     return render_to_response('links.html',
@@ -23,6 +23,7 @@ def settings(request):
     context = RequestContext(request, {}, [get_settings])
     return render_to_response('settings.html', context_instance = context)
 
+@login_required
 def edit_person(request):
     first_person = Person.objects.all()[0]  #first person in DB       
     form = PersonForm(instance = first_person) 
