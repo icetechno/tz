@@ -30,3 +30,6 @@ class HttpRequestData(models.Model):
     meta = models.TextField()
     user = models.TextField(blank = True)
     date = models.DateTimeField(auto_now_add = True)
+    
+    def __unicode__(self):
+        return u'%s %s' % (self.path, self.request)
