@@ -32,6 +32,9 @@ class HttpRequestData(models.Model):
     user = models.TextField(blank = True)
     date = models.DateTimeField(auto_now_add = True)
     
+    def __unicode__(self):
+        return u'%s %s' % (self.path, self.request)    
+
 class SignalLog(models.Model):
     souce = models.CharField(max_length = 254)
     type = models.CharField(max_length = 15)
