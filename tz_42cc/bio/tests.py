@@ -5,6 +5,8 @@ from model_form import PersonDetail
 from zlib import crc32
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.template.loader import get_template
+from django.template import Context
 
 #Ticket1
 class BioTest(TestCase):
@@ -74,3 +76,13 @@ class EditTest(TestCase):
         except:
             self.assertTrue(False, "person edit fail - incorrect response")        
         self.failUnlessEqual(response_name, data['name'], 'person edit fail - incorrect data')
+        
+class DateWidgetTest(TestCase):
+    def load(self):        
+        #loading template
+        template = get_template('bio/edit.html')
+        c = Context({})        
+        #checkign JavaScript block CRC
+        rendered_data = template.nodelist[0].blocks['js'].render(c)
+        encoded_data = unicode(rendered_data).encode('utf-8')
+        self.failUnlessEqual(crc32(encoded_data), -0x1d02e87b , 'JavaScript code required by widget loaded incorrect')       
