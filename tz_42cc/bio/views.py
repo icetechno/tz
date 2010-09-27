@@ -11,7 +11,7 @@ def start_page(request):
     return render_to_response('links.html',
                         {},
                         context_instance = RequestContext(request))
-    
+
 def index(request):
     first_person = Person.objects.all()[0]  #first person in DB       
     form = PersonDetail(instance = first_person)     
@@ -19,7 +19,10 @@ def index(request):
                         {'form': form}, 
                         context_instance = RequestContext(request))
 
-@login_required
+def settings(request):
+    context = RequestContext(request, {}, [get_settings])
+    return render_to_response('settings.html', context_instance = context)
+
 def edit_person(request):
     first_person = Person.objects.all()[0]  #first person in DB       
     form = PersonForm(instance = first_person) 
@@ -37,10 +40,6 @@ def edit_person(request):
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect('/')
-
-def settings(request):
-    context = RequestContext(request, {}, [get_settings])
-    return render_to_response('settings.html', context_instance = context)
 
 def test_tag(request):
     return render_to_response('test_tag.html', {'request': request}, context_instance = RequestContext(request))

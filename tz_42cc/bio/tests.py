@@ -37,4 +37,26 @@ class HttpRequestLogTest(TestCase):
 class ContextProcessorTest(TestCase):
     def loopback(self):
         response = self.client.get('/settings/')
-        self.failUnlessEqual(response.context['settings']['SECRET_KEY'], settings.SECRET_KEY)        
+        self.failUnlessEqual(response.context['settings']['SECRET_KEY'], settings.SECRET_KEY)
+        
+#Ticket5
+class EditTest(TestCase):    
+    def change(self):
+        person = Person.objects.all()[0]    #get person for save
+        target_path = '/bio/edit/'
+        response = self.client.get(target_path)
+        token = response.context['csrf_token']
+        data = {'name': 'john', 
+                'surname': 'smith',
+                'contacts': 'hidden',
+                'birthdate': '1983-06-24',
+                'csrfmiddlewaretoken': token,
+                }
+        response = self.client.post(target_path, data)
+        person.save()   #Re-write initial data
+        response_name = ''
+        try:
+            response_name = response.context['form']['name'].data
+        except:
+            self.assertTrue(False, "person edit fail - incorrect response")        
+        self.failUnlessEqual(response_name, data['name'], 'person edit fail - incorrect data')
