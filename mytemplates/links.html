@@ -1,15 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Start page</title>
-</head>
-<body>
+{% extends "base_generic.html" %}
+{% block title %}links to test task parts{% endblock %}
+{% block content %}
+<p>links to test task parts:</p>
     <ul>
-        <li><a href="/bio/">Person - Ticket#1</a></li>
-        <li><a href="/settings/">template-context-processor - Ticket#4</a></li>
-        <li><a href="/bio/edit/">edit data - Ticket#5 and Ticket#6</a></li>
+<<<<<<< HEAD
+        <li><a href="/bio/">Ticket#1</a></li>
+        <li><a href="/settings/">Ticket#4</a></li>
+        <li><a href="/bio/edit/">Ticket#2, Ticket#5, Ticket#6</a></li>
         <li><a href="/logout/">Log out</a></li>
     </ul>
-</body>
-</html>
+{% endblock %}
