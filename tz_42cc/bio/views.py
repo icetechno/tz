@@ -3,6 +3,9 @@ from models import Person
 from model_form import PersonDetail, PersonForm
 from django.template import RequestContext
 from context_processor import get_settings
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.http import HttpResponseRedirect
 
 def start_page(request):
     return render_to_response('links.html',
@@ -20,6 +23,7 @@ def settings(request):
     context = RequestContext(request, {}, [get_settings])
     return render_to_response('settings.html', context_instance = context)
 
+@login_required
 def edit_person(request):
     first_person = Person.objects.all()[0]  #first person in DB       
     form = PersonForm(instance = first_person) 
@@ -33,3 +37,7 @@ def edit_person(request):
     return render_to_response('bio/edit.html', 
                               {'form': form}, 
                               context_instance = RequestContext(request))
+
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect('/')    
