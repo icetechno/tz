@@ -1,29 +1,18 @@
 from django.test import TestCase
-from django.test.client import Client
 from models import Person, HttpRequestData
-from model_form import PersonDetail
 from zlib import crc32
 from django.conf import settings
 
 #Ticket1
 class BioTest(TestCase):
     fixtures = ['initial_data.json',]   #my fixtures
-    
-    def testView(self):
-        crc_value = -0x52959224
-        client = Client()
-        person = Person.objects.all()[0]  #first person in DB       
-        form = PersonDetail(instance = person) 
-        response = client.get('/bio/')        
+            
+    def simpleTest(self):
+        response = self.client.get('/')
         # Check that the response is 200 OK.
         self.failUnlessEqual(response.status_code, 200)
-        # Check that the rendered context not moddifed and renders fine
-        external_view = unicode(response.context['form']).encode('utf-8')
-        internal_view = unicode(form).encode('utf-8')
-        # Check that the rendered context not moddifed
-        self.failUnlessEqual(crc32(internal_view), crc_value, 'content modifed, CRC32 not much')
-        # Check that renders fine
-        self.failUnlessEqual(external_view, internal_view, 'internal and external wiew are not equal')
+        # find data pattern
+        self.failIfEqual(response.content.find('0974865577'), -1, 'data pattern not found in response')
         
 #Ticket3
 class HttpRequestLogTest(TestCase):
@@ -37,4 +26,4 @@ class HttpRequestLogTest(TestCase):
 class ContextProcessorTest(TestCase):
     def loopback(self):
         response = self.client.get('/settings/')
-        self.failUnlessEqual(response.context['settings']['SECRET_KEY'], settings.SECRET_KEY)        
+        self.failUnlessEqual(response.context['settings']['SECRET_KEY'], settings.SECRET_KEY)
