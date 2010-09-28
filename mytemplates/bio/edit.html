@@ -1,16 +1,18 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html lang="en">
-<head>
-    <title>edit page</title>
-</head>
-<body>
-    <h3>edit person</h3>
-    <form action="/bio/edit/" method="POST">
-    	{% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-        <p><input type="submit" value="Submit"></p>
-    </form>
-</body>
-</html>
+{% extends "base_generic.html" %}
+{% block title %}edit page{% endblock %} 
+	{% block js %}
+		<script type="text/javascript">window.__admin_media_prefix__ = "/media/";</script>	   
+   		<script type="text/javascript" src="/admin/jsi18n/"></script>
+		<script type="text/javascript" src="/media/js/core.js"></script>
+		<script type="text/javascript" src="/media/js/calendar.js"></script>
+		<script type="text/javascript" src="/media/js/admin/DateTimeShortcuts.js"></script>
+	{% endblock %} 
+{% block content %}
+<h3 style="margin-top: 50px">edit person</h3>
+<form action="/edit/" method="POST">{% csrf_token %}
+	<table>
+		{{ form.as_table }}
+	</table>
+<p><input type="submit" value="Редактировать"></p>
+</form>
+{% endblock %}

@@ -1,19 +1,30 @@
 from django.shortcuts import render_to_response
-from tz_42cc.bio.models import Person
-from django.contrib.auth.decorators import login_required
+from models import Person
+from model_form import PersonForm
 from django.template import RequestContext
+from context_processor import get_settings
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
-from tz_42cc.bio.context_processor import get_settings
-from tz_42cc.bio.model_form import PersonForm
-
-
-def start_page(request):
-    return render_to_response('links.html', {})
 
 def index(request):
-    persons_data = Person.objects.all()
-    return render_to_response('bio/index.html', {'persons_data': persons_data})
+    person = Person.objects.all()[0]  #first person in DB       
+    #get list (verbose_name,value) for object
+    person_data = []
+    for field in person._meta.fields:
+        key = field.verbose_name
+        value = person.__getattribute__(field.name)
+        if key == 'ID':
+            continue
+        person_data.append((key, value))
+                         
+    return render_to_response('bio/index.html', 
+                        {'person': person_data}, 
+                        context_instance = RequestContext(request))
+
+def settings(request):
+    context = RequestContext(request, {}, [get_settings])
+    return render_to_response('settings.html', context_instance = context)
 
 @login_required
 def edit_person(request):
@@ -32,8 +43,4 @@ def edit_person(request):
 
 def logout_user(request):
     logout(request)
-    return HttpResponseRedirect('/bio')
-
-def settings(request):
-    context = RequestContext(request, {}, [get_settings])
-    return render_to_response('settings.html', context_instance = context)
+    return HttpResponseRedirect('/')    
