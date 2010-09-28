@@ -26,4 +26,4 @@ class PersonForm(ModelForm):
         }
         widgets = {
             'contacts': Textarea(attrs={'cols': 40, 'rows': 2}),
-        }    
+        }

@@ -48,7 +48,7 @@ class EditTest(TestCase):
         self.failUnlessEqual(response.status_code, 302, 'person edit fail - login failed')
         #change data
         person = Person.objects.all()[0]    #get person for save
-        target_path = '/bio/edit/'
+        target_path = '/edit/'
         response = self.client.get(target_path)
         token = response.context['csrf_token']
         data = {'name': 'john', 

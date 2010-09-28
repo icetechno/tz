@@ -1,10 +1,10 @@
 from django.shortcuts import render_to_response
 from models import Person, HttpRequestData
+from model_form import PersonForm
 from django.template import RequestContext
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from context_processor import get_settings
-from model_form import PersonForm
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -54,4 +54,5 @@ def loglist(request):
         log_list = HttpRequestData.objects.order_by(order)[:10]
     else:
         log_list = HttpRequestData.objects.all()[:10]
-    return render_to_response('log_list.html', {'log_list' : log_list})
+    return render_to_response('log_list.html', {'log_list' : log_list},
+                              context_instance = RequestContext(request))

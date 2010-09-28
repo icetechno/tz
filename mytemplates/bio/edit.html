@@ -9,10 +9,10 @@
 	{% endblock %} 
 {% block content %}
 <h3>edit person</h3>
-<form action="/bio/edit/" method="POST">{% csrf_token %}
+<form action="/edit/" method="POST">{% csrf_token %}
 	<table>
 		{{ form.as_table }}
 	</table>
-<p><input type="submit" value="Submit"></p>
+<p><input type="submit" value="Редактировать"></p>
 </form>
 {% endblock %}
