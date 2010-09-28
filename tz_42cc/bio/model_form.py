@@ -27,11 +27,3 @@ class PersonForm(ModelForm):
         widgets = {
             'contacts': Textarea(attrs={'cols': 40, 'rows': 2}),
         }    
-
-# Create the form class.
-class PersonDetail(ModelForm):           
-    class Meta:
-        model = Person
-        widgets = {
-            'contacts': Textarea(attrs={'cols': 40, 'rows': 2}),
-            }

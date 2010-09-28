@@ -1,7 +1,10 @@
 {% extends "base_generic.html" %}
 {% block title %}Person Details{% endblock %}
 {% block content %}
-<table>
-	{{ form.as_table }}
-</table>
+<dl>
+{% for key, value in person %}
+  <dt>{{ key }}</dt>
+ 	{{ value }}</dd>
+{% endfor %}  
+</dl>
 {% endblock %}
