@@ -1,6 +1,5 @@
 from django.test import TestCase
 from models import Person, HttpRequestData
-from model_form import PersonDetail
 from zlib import crc32
 from django.conf import settings
 from django.contrib.auth.models import User
