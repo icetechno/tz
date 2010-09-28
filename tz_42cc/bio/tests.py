@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.template.loader import get_template
 from django.template import Context
+from model_form import PersonForm
 
 #Ticket1
 class BioTest(TestCase):
@@ -65,7 +66,8 @@ class EditTest(TestCase):
         except:
             self.assertTrue(False, "person edit fail - incorrect response")        
         self.failUnlessEqual(response_name, data['name'], 'person edit fail - incorrect data')
-        
+
+#Ticket6        
 class DateWidgetTest(TestCase):
     def load(self):        
         #loading template
@@ -75,3 +77,13 @@ class DateWidgetTest(TestCase):
         rendered_data = template.nodelist[0].blocks['js'].render(c)
         encoded_data = unicode(rendered_data).encode('utf-8')
         self.failUnlessEqual(crc32(encoded_data), -0x1d02e87b , 'JavaScript code required by widget loaded incorrect')       
+
+#Ticket7
+class ReverseTest(TestCase):
+    def check_ifreversed(self):
+        first_person = Person.objects.all()[0]
+        form = PersonForm(instance = first_person)
+        rendered_data = form.as_table()
+        birthdate_pos = rendered_data.find("id_birthdate")
+        name_pos = rendered_data.find("id_name")
+        self.failUnless(birthdate_pos < name_pos, 'Fields are not reversed')

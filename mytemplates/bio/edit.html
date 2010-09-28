@@ -8,7 +8,7 @@
 		<script type="text/javascript" src="/media/js/admin/DateTimeShortcuts.js"></script>
 	{% endblock %} 
 {% block content %}
-<h3>edit person</h3>
+<h3 style="margin-top: 50px">edit person</h3>
 <form action="/edit/" method="POST">{% csrf_token %}
 	<table>
 		{{ form.as_table }}
