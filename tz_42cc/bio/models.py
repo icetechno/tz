@@ -32,5 +32,4 @@ class HttpRequestData(models.Model):
     date = models.DateTimeField(auto_now_add = True)
     
     def __unicode__(self):
-        return u'%s %s' % (self.path, self.method)
-    
+        return u'%s %s' % (self.path, self.request)

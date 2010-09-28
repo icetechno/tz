@@ -1,7 +1,17 @@
 {% extends "base_generic.html" %}
 {% block title %}Person Details{% endblock %}
 {% block content %}
-<table>
-	{{ form.as_table }}
-</table>
+<dl>
+{% for key, value in person %}
+  <dt>{{ key }}</dt>
+ 	{{ value }}</dd>
+{% endfor %}  
+</dl>
+<HR>
+<p>links to test task parts:</p>
+<ul>
+	<li><a href="/settings/">Ticket#4</a></li>
+	<li><a href="/edit/">Ticket#5, Ticket#2, Ticket#6</a></li>
+	<li><a href="/logout/">Log out</a></li>
+</ul>
 {% endblock %}
