@@ -1,23 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html lang="en">
-<head>	
-    <script type="text/javascript" src="/site_media/js/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="/site_media/js/jquery.form.js"></script>
-    <script type="text/javascript" src="/site_media/js/edit_form.js"></script> 
-    <title>edit page</title>    
-</head>
-<body>
-<div id='output1'>edit person  
-    <form id='editForm' action="/bio/edit/" method="POST">
-    	{% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-        <p><input type="submit" value="Submit"></p>
-    </form>
-<div id='progress' style="display: none">
-	<img src="/site_media/img/loader.gif">
-</div>     
-</div>    
-</body>   	
-</html>
+{% extends "base_generic.html" %}
+{% block title %}edit page{% endblock %} 
+	{% block js %}
+		<script type="text/javascript">window.__admin_media_prefix__ = "/media/";</script>	   
+   		<script type="text/javascript" src="/admin/jsi18n/"></script>
+		<script type="text/javascript" src="/media/js/core.js"></script>
+		<script type="text/javascript" src="/media/js/calendar.js"></script>
+		<script type="text/javascript" src="/media/js/admin/DateTimeShortcuts.js"></script>
+		<script type="text/javascript" src="/site_media/js/jquery-1.4.2.min.js"></script>
+    	<script type="text/javascript" src="/site_media/js/jquery.form.js"></script>
+    	<script type="text/javascript" src="/site_media/js/edit_form.js"></script> 
+	{% endblock %} 
+{% block content %}
+<h3 style="margin-top: 50px">edit person</h3>
+<div id='output1'>
+<form id='editForm' action="/edit/" method="POST">{% csrf_token %}
+	<table>
+		{{ form.as_table }}
+	</table>
+<p><input type="submit" value="Редактировать"></p>
+</form>
+	<div id='progress' style="display: none">
+		<img src="/site_media/img/loader.gif">
+	</div>
+</div> 
+{% endblock %}
