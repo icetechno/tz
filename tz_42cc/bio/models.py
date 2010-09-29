@@ -2,6 +2,7 @@
 from django.db import models
 #imports for signal dispatcher
 from django.db.models.signals import post_init, post_save, post_delete
+from django.contrib.contenttypes.models import ContentType
 
 #That class represents a person
 class Person(models.Model):
@@ -44,6 +45,8 @@ class SignalLog(models.Model):
     
 def my_callback(sender, **kwargs):
     if sender == SignalLog:             #don`t log self
+        return
+    elif sender == ContentType:           #dont fail django test
         return
     
     try:
