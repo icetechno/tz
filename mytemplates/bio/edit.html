@@ -11,8 +11,8 @@
     	<script type="text/javascript" src="/site_media/js/edit_form.js"></script> 
 	{% endblock %} 
 {% block content %}
-<h3 style="margin-top: 50px">edit person</h3>
 <div id='output1'>
+<h3 style="margin-top: 50px">edit person</h3>
 <form id='editForm' action="/edit/" method="POST">{% csrf_token %}
 	<table>
 		{{ form.as_table }}
