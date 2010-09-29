@@ -1,4 +1,5 @@
 # Django settings for tz_42cc project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -11,8 +12,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'tz_db1',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'dev.db',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -80,10 +81,13 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'tz_42cc.urls'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    "/var/test/tz/mytemplates",
+os.path.abspath(
+        os.path.join(
+            os.path.dirname(
+                os.path.join(os.path.abspath(__file__), '../../..')
+            ),
+            "mytemplates")
+    ),
 )
 
 INSTALLED_APPS = (
@@ -97,8 +101,4 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'tz_42cc.bio',
-)
-
-FIXTURE_DIRS = (
-   '/var/test/tz/fixtures',
 )

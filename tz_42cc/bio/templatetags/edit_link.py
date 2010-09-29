@@ -14,6 +14,12 @@ def do_edit_link(parser, token):
 
 #return admin edit url for object
 def url_to_edit_object(object):
+    try:
+        if str(object.__class__) == "<class 'django.contrib.auth.models.AnonymousUser'>":
+            return u'<a href="%s">Can`t edit AnonymousUser, LogIn first!</a>' % '/accounts/login/?next=/'
+    except:
+        return 'render error.'
+    
     url = reverse('admin:%s_%s_change' %(object._meta.app_label,  object._meta.module_name),  args=[object.id] )
     return u'<a href="%s">Edit %s</a>' %(url,  object.__unicode__())
 
