@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.template.loader import get_template
 from django.template import Context
 from model_form import PersonForm
+from django.core import management
+import cStringIO
 
 #Ticket1
 class BioTest(TestCase):
@@ -100,3 +102,17 @@ class CustomTagTest(TestCase):
         login = self.client.login(username = username, password = password)
         response = self.client.get('/')
         self.failIfEqual(response.content.find('<a href="/admin/auth/user/1/">Edit root</a>'), -1, 'custom tag render error')
+  
+#Ticket9
+class CommandTest(TestCase):
+    def test_mycommand_failure(self):
+        #minimum count models in database
+        MODELS_MIN = 9
+        #new buffer
+        new_io = cStringIO.StringIO()
+        #execute my command and put out into my buffer
+        management.call_command('models_count', stdout=new_io)
+        #get buffer value         
+        command_output = new_io.getvalue()
+        #set up test condition 
+        self.failUnless(command_output.count("<class") > MODELS_MIN, 'models list are too small')
