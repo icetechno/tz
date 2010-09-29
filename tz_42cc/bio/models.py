@@ -40,6 +40,9 @@ class SignalLog(models.Model):
     souce = models.CharField(max_length = 254)
     type = models.CharField(max_length = 15)
     
+    def __unicode__(self):
+        return u'%s %s' % (self.type, self.souce)     
+    
 def my_callback(sender, **kwargs):
     if sender == SignalLog:             #don`t log self
         return
