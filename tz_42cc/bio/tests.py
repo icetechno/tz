@@ -158,3 +158,20 @@ class LogTest(TestCase):
     def get_logs(self):
         response = self.client.get('/loglist/?secret_pattern=secret_pattern')
         self.failIfEqual(response.content.find('secret_pattern'), -1, 'query not logged')
+        
+#Ticket13
+class LogOrderTest(TestCase):
+    def get_logs(self):
+        #make 2 queries
+        response = self.client.get('/loglist/?order=id')              
+        response = self.client.get('/loglist/?order=id')
+        #Fine ID position on page
+        ID_1_pos = response.content.find("<td>1</td>")
+        ID_2_pos = response.content.find("<td>2</td>")
+        self.failUnless(ID_1_pos < ID_2_pos, 'Logs displayed incorrectly')
+        #make query where order is revered
+        response = self.client.get('/loglist/?order=-id')
+        #Fine ID position on page
+        ID_1_pos = response.content.find("<td>1</td>")
+        ID_2_pos = response.content.find("<td>2</td>")
+        self.failUnless(ID_1_pos > ID_2_pos, 'Logs displayed incorrectly')

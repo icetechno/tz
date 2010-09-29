@@ -57,6 +57,3 @@ def loglist(request):
 def settings(request):
     context = RequestContext(request, {}, [get_settings])
     return render_to_response('settings.html', context_instance = context)
-
-def test_tag(request):
-    return render_to_response('test_tag.html', {'request': request}, context_instance = RequestContext(request))
