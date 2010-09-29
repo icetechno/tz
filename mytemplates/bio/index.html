@@ -1,17 +1,18 @@
-{% if persons_data %}
-    <ul>
-    {% for person in persons_data %}
-        <li>{{ person.name }} {{ person.surname }}</li>
-        <li>bio: {{ person.bio }}</li>
-        <li>contacts: {{ person.contacts }}</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>Database empty =(</p>
-{% endif %}
-{% if user.is_authenticated %}
-   	<div>
-		<a href="/logout/">Log out</a>
-	</div>
-{% endif %}
-<a href="/bio/edit/">Edit</a>
+{% extends "base_generic.html" %}
+{% block title %}Person Details{% endblock %}
+{% block content %}
+<dl>
+{% for key, value in person %}
+  <dt>{{ key }}</dt>
+ 	{{ value }}</dd>
+{% endfor %}  
+</dl>
+<HR>
+<p>links to test task parts:</p>
+<ul>
+	<li><a href="/settings/">Ticket#4</a></li>
+	<li><a href="/edit/">Ticket#5, Ticket#2, Ticket#6, Ticket#7</a></li>
+	<li>Ticket#8 {% load edit_link %}{% edit_link request.user %}</li>
+	<li><a href="/logout/">Log out</a></li>
+</ul>
+{% endblock %}
