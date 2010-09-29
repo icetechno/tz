@@ -78,7 +78,8 @@ class DateWidgetTest(TestCase):
         #checkign JavaScript block CRC
         rendered_data = template.nodelist[0].blocks['js'].render(c)
         encoded_data = unicode(rendered_data).encode('utf-8')
-        self.failUnlessEqual(crc32(encoded_data), -0x1d02e87b , 'JavaScript code required by widget loaded incorrect')       
+        #self.failUnlessEqual(crc32(encoded_data), -0x1d02e87b , 'JavaScript code required by widget loaded incorrect')       
+        self.failUnlessEqual(crc32(encoded_data), -0xac22570 , 'JavaScript code required by widget loaded incorrect')
 
 #Ticket7
 class ReverseTest(TestCase):
