@@ -1,5 +1,5 @@
 from django.test import TestCase
-from models import Person, HttpRequestData
+from models import Person, HttpRequestData, SignalLog
 from zlib import crc32
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -116,3 +116,16 @@ class CommandTest(TestCase):
         command_output = new_io.getvalue()
         #set up test condition 
         self.failUnless(command_output.count("<class") > MODELS_MIN, 'models list are too small')
+         
+#Ticket10
+class SignalTest(TestCase):
+    def test_all(self):
+        target_class = "<class 'tz_42cc.bio.models.Person'>"
+        actions = ('init', 'save', 'delete')
+        first_person = Person.objects.all()[0]
+        first_person.name = 'test'
+        first_person.save()
+        first_person.delete()
+        for action in actions:                    
+            self.failUnless(SignalLog.objects.filter(type = action, souce = target_class), '%s action not found in logs' % action)
+            
