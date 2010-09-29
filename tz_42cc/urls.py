@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings as django_settings
-from bio.views import index, edit_person,  logout_user, settings, test_tag, loglist
+from bio.views import index, edit_person,  logout_user, settings, loglist
 
 from django.contrib import admin
 admin.autodiscover()
