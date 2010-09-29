@@ -153,3 +153,9 @@ class JqueryTest(TestCase):
                                                   'csrfmiddlewaretoken': token,})
         person.save()
         self.failUnlessEqual(response.context['form']['name'].data, 'john', 'person edit fail - incorrect data') 
+        
+#Ticket12
+class LogTest(TestCase):
+    def get_logs(self):
+        response = self.client.get('/loglist/?secret_pattern=secret_pattern')
+        self.failIfEqual(response.content.find('secret_pattern'), -1, 'query not logged')       
