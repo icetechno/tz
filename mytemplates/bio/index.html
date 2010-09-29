@@ -12,6 +12,7 @@
 <ul>
 	<li><a href="/settings/">Ticket#4</a></li>
 	<li><a href="/edit/">Ticket#5, Ticket#2, Ticket#6, Ticket#7</a></li>
+	<li>Ticket#8 {% load edit_link %}{% edit_link request.user %}</li>
 	<li><a href="/logout/">Log out</a></li>
 </ul>
 {% endblock %}

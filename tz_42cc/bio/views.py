@@ -19,7 +19,7 @@ def index(request):
         person_data.append((key, value))
                          
     return render_to_response('bio/index.html', 
-                        {'person': person_data}, 
+                        {'person': person_data, 'request': request}, 
                         context_instance = RequestContext(request))
 
 def settings(request):
@@ -44,9 +44,6 @@ def edit_person(request):
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect('/')
-
-def test_tag(request):
-    return render_to_response('test_tag.html', {'request': request}, context_instance = RequestContext(request))
 
 def loglist(request):
     if request.REQUEST.has_key('order'):
