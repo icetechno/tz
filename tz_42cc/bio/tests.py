@@ -42,42 +42,30 @@ class ContextProcessorTest(TestCase):
         response = self.client.get('/settings/')
         self.failUnlessEqual(response.context['settings']['SECRET_KEY'],
                              settings.SECRET_KEY)
-        
-        
+
+
 #Ticket5
-class EditTest(TestCase):    
-    def change(self):
-        #login 
-        username = 'root'
-        password = '111111'
-        login_path = '/accounts/login/'
-        user = User.objects.create_user(username, 'vasya@mail.ru', password)
-        user.save()
-        response = self.client.get(login_path)        
-        token = response.context['csrf_token']
-        response = self.client.post(login_path, {'username': username, 
-                                                 'password': password,
-                                                 'csrfmiddlewaretoken': token}) 
-        self.failUnlessEqual(response.status_code, 302, 'person edit fail - login failed')
-        #change data
-        person = Person.objects.all()[0]    #get person for save
+class EditTest(TestCase):
+    def test_change(self):
+        person = Person.objects.all()[0]    # get person for save
         target_path = '/edit/'
         response = self.client.get(target_path)
         token = response.context['csrf_token']
-        data = {'name': 'john', 
+        data = {'name': 'john',
                 'surname': 'smith',
                 'contacts': 'hidden',
                 'birthdate': '1983-06-24',
                 'csrfmiddlewaretoken': token,
                 }
         response = self.client.post(target_path, data)
-        person.save()   #Re-write initial data
+        person.save()   # Re-write initial data
         response_name = ''
         try:
             response_name = response.context['form']['name'].data
         except:
-            self.assertTrue(False, "person edit fail - incorrect response")        
-        self.failUnlessEqual(response_name, data['name'], 'person edit fail - incorrect data')
+            self.assertTrue(False, "person edit fail - incorrect response")
+        self.failUnlessEqual(response_name, data['name'],
+                             'person edit fail - incorrect data')
 
 #Ticket6        
 class DateWidgetTest(TestCase):

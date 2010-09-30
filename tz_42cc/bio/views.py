@@ -30,18 +30,19 @@ def settings(request):
 
 @login_required
 def edit_person(request):
-    first_person = Person.objects.all()[0]  #first person in DB       
-    form = PersonForm(instance = first_person) 
-    if request.method == 'POST':  #recived post data to save  
-        form = PersonForm(request.POST, instance = first_person) #load post data into object
-        if form.is_valid(): #if form data are valid
-            form.save()     #save data from object to DB
-        else: # form data not valid
-            return render_to_response('bio/edit_error.html')
-    
+    first_person = Person.objects.all()[0]  # first person in DB
+    form = PersonForm(instance=first_person)
+    if request.method == 'POST':  # recived post data to save
+        # load post data into object
+        form = PersonForm(request.POST, instance=first_person)
+        if form.is_valid():  # if form data are valid
+            form.save()      # save data from object to DB
+        else:  # form data not valid
+            return render_to_response('bio/edit_error.html')        
     return render_to_response('bio/edit.html', 
                               {'form': form}, 
                               context_instance = RequestContext(request))
+
 
 def logout_user(request):
     logout(request)
