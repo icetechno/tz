@@ -3,31 +3,38 @@ from django.core.urlresolvers import reverse
 
 register = template.Library()
 
+
 #compilation function
 def do_edit_link(parser, token):
     try:
-        tag_name, target = token.split_contents()    #safe split
+        tag_name, target = token.split_contents()    # safe split
     except ValueError:
         msg = '%r tag requires a single argument' % token.contents[0]
         raise template.TemplateSyntaxError(msg)
     return EditLinkNode(target)
 
+
 #return admin edit url for object
 def url_to_edit_object(object):
     try:
-        if str(object.__class__) == "<class 'django.contrib.auth.models.AnonymousUser'>":
-            return u'<a href="%s">Can`t edit AnonymousUser, LogIn first!</a>' % '/accounts/login/?next=/'
+        if str(object.__class__) == \
+        "<class 'django.contrib.auth.models.AnonymousUser'>":
+            return (u'<a href="%s">Can`t edit AnonymousUser, LogIn first!</a>'
+                % '/accounts/login/?next=/')
     except:
         return 'render error.'
-    
-    url = reverse('admin:%s_%s_change' %(object._meta.app_label,  object._meta.module_name),  args=[object.id] )
-    return u'<a href="%s">Edit %s</a>' %(url,  object.__unicode__())
+
+    url = reverse('admin:%s_%s_change' % (object._meta.app_label,
+                                          object._meta.module_name),
+                                          args=[object.id])
+    return u'<a href="%s">Edit %s</a>' % (url, object.__unicode__())
+
 
 #template node
 class EditLinkNode(template.Node):
     def __init__(self, target):
         self.target_variable = template.Variable(target)
-        
+
     def render(self, context):
         try:
             actual_variable = self.target_variable.resolve(context)
@@ -35,9 +42,5 @@ class EditLinkNode(template.Node):
         except template.VariableDoesNotExist:
             return 'render error'
 
-#regiser tag in libray       
-register.tag('edit_link', do_edit_link)    
-    
-    
-    
-    
+#regiser tag in libray
+register.tag('edit_link', do_edit_link)
