@@ -92,7 +92,6 @@ class DateWidgetTest(TestCase):
         # checkign JavaScript block CRC
         rendered_data = template.nodelist[0].blocks['js'].render(c)
         encoded_data = unicode(rendered_data).encode('utf-8')
-        #-0x1d02e87b  
         self.failUnlessEqual(crc32(encoded_data),
                     - 0xac22570,
                     'JavaScript code required by widget loaded incorrect')
@@ -160,26 +159,30 @@ class SignalTest(TestCase):
 
 #Ticket11
 class JqueryTest(TestCase):
-    def edit_test(self):
-        person = Person.objects.all()[0] 
+    def test_edit(self):
+        person = Person.objects.all()[0]
         #create user
         username = 'root',
         password = '111111'
         user = User.objects.create_user(username, 'vasya@mail.ru', password)
         user.save()
         # Log in
-        login = self.client.login(username = username, password = password)
+        login = self.client.login(username=username, password=password)
         target_path = '/edit/'
         response = self.client.get(target_path)
         token = response.context['csrf_token']
         # post form
-        response = self.client.post(target_path, {'name': 'john', 
-                                                  'surname': 'smith',
-                                                  'contacts': 'hidden',
-                                                  'birthdate': '1983-06-24',
-                                                  'csrfmiddlewaretoken': token,})
+        response = self.client.post(target_path, {'name': 'john',
+                            'surname': 'smith',
+                            'contacts': 'hidden',
+                            'birthdate': '1983-06-24',
+                            'csrfmiddlewaretoken': token, })
         person.save()
-        self.failUnlessEqual(response.context['form']['name'].data, 'john', 'person edit fail - incorrect data') 
+        self.failUnlessEqual(response.context['form']['name'].data,
+                             'john',
+                             'person edit fail - incorrect data'
+        )
+
         
 #Ticket12
 class LogTest(TestCase):
