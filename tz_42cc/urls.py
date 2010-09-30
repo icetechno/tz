@@ -7,7 +7,7 @@ admin.autodiscover()
 from bio.views import settings
 
 urlpatterns = patterns('',
-    (r'^$', index),                       
+    (r'^$', index),
     (r'^admin/', include(admin.site.urls)),
     (r'^settings/$', settings),
 )
