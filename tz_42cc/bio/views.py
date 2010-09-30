@@ -18,8 +18,9 @@ def index(request):
         if key == 'ID':
             continue
         person_data.append((key, value))
+
     return render_to_response('bio/index.html',
-                        {'person': person_data},
+                        {'person': person_data, 'request': request},
                         context_instance=RequestContext(request))
 
 
@@ -60,4 +61,4 @@ def loglist(request):
 
 def settings(request):
     context = RequestContext(request, {}, [get_settings])
-    return render_to_response('settings.html', context_instance = context)
+    return render_to_response('settings.html', context_instance=context)

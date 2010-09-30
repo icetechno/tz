@@ -111,16 +111,21 @@ class ReverseTest(TestCase):
 
 #Ticket8
 class CustomTagTest(TestCase):
-    def check_render(self):
+    def test_render(self):
         #create user
         username = 'root'
         password = '111111'
         user = User.objects.create_user(username, 'vasya@mail.ru', password)
         user.save()
         # Log in
-        login = self.client.login(username = username, password = password)
+        login = self.client.login(username=username, password=password)
         response = self.client.get('/')
-        self.failIfEqual(response.content.find('<a href="/admin/auth/user/1/">Edit root</a>'), -1, 'custom tag render error')
+        self.failIfEqual(
+            response.content.find('a href="/admin/auth/user/1/">Edit root</a'),
+            -1,
+            'custom tag render error'
+        )
+ 
   
 #Ticket9
 class CommandTest(TestCase):
