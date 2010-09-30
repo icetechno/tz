@@ -82,17 +82,21 @@ class EditTest(TestCase):
         self.failUnlessEqual(response_name, data['name'],
                              'person edit fail - incorrect data')
 
+
 #Ticket6        
 class DateWidgetTest(TestCase):
-    def load(self):        
-        #loading template
+    def test_load(self):
+        # loading template
         template = get_template('bio/edit.html')
-        c = Context({})        
-        #checkign JavaScript block CRC
+        c = Context({})
+        # checkign JavaScript block CRC
         rendered_data = template.nodelist[0].blocks['js'].render(c)
         encoded_data = unicode(rendered_data).encode('utf-8')
-        #self.failUnlessEqual(crc32(encoded_data), -0x1d02e87b , 'JavaScript code required by widget loaded incorrect')       
-        self.failUnlessEqual(crc32(encoded_data), -0xac22570 , 'JavaScript code required by widget loaded incorrect')
+        #-0x1d02e87b   
+        self.failUnlessEqual(crc32(encoded_data),
+                    -0xac22570,
+                    'JavaScript code required by widget loaded incorrect')
+
 
 #Ticket7
 class ReverseTest(TestCase):

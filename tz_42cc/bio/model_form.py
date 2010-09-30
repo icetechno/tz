@@ -1,11 +1,13 @@
 from django.forms import ModelForm, Textarea
 from models import Person
 from django import forms
+from django.forms import ModelForm, Textarea
 from django.contrib.admin.widgets import AdminDateWidget
 import settings
 
+
 # Create the form class.
-class PersonForm(ModelForm):   
+class PersonForm(ModelForm):
     birthdate = forms.DateField(widget=AdminDateWidget())
     
     def __init__(self, *args, **kw): 
