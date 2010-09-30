@@ -38,9 +38,11 @@ class HttpRequestLogTest(TestCase):
 
 #Ticket4
 class ContextProcessorTest(TestCase):
-    def loopback(self):
+    def test_loopback(self):
         response = self.client.get('/settings/')
-        self.failUnlessEqual(response.context['settings']['SECRET_KEY'], settings.SECRET_KEY)
+        self.failUnlessEqual(response.context['settings']['SECRET_KEY'],
+                             settings.SECRET_KEY)
+        
         
 #Ticket5
 class EditTest(TestCase):    

@@ -25,7 +25,8 @@ def index(request):
 
 def settings(request):
     context = RequestContext(request, {}, [get_settings])
-    return render_to_response('settings.html', context_instance = context)
+    return render_to_response('settings.html', context_instance=context)
+
 
 @login_required
 def edit_person(request):
