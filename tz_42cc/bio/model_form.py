@@ -1,15 +1,15 @@
 from django.forms import ModelForm
 from models import Person
 from django import forms
-from django.forms.extras.widgets import SelectDateWidget
 from django.forms import ModelForm, Textarea
 from django.contrib.admin.widgets import AdminDateWidget
 import settings
 
+
 # Create the form class.
-class PersonForm(ModelForm):   
+class PersonForm(ModelForm):
     birthdate = forms.DateField(widget=AdminDateWidget())
-    
+
     class Meta:
         model = Person
         js = ('/admin/jsi18n/',
