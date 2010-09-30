@@ -197,7 +197,7 @@ class LogTest(TestCase):
 
 #Ticket13
 class LogOrderTest(TestCase):
-    def get_logs(self):
+    def test_logs(self):
         #make 2 queries
         response = self.client.get('/loglist/?order=id')
         response = self.client.get('/loglist/?order=id')
