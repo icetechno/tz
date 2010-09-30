@@ -34,7 +34,7 @@ class HttpRequestData(models.Model):
     date = models.DateTimeField(default=datetime.now)
 
     def __unicode__(self):
-        return u'%s %s' % (self.path, self.request)   
+        return u'%s %s' % (self.path, self.request)
 
 
 class SignalLog(models.Model):

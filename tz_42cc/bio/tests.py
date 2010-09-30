@@ -83,7 +83,7 @@ class EditTest(TestCase):
                              'person edit fail - incorrect data')
 
 
-#Ticket6        
+#Ticket6
 class DateWidgetTest(TestCase):
     def test_load(self):
         # loading template
@@ -124,6 +124,7 @@ class CustomTagTest(TestCase):
             -1,
             'custom tag render error'
         )
+
 
 #Ticket9
 class CommandTest(TestCase):
@@ -183,18 +184,22 @@ class JqueryTest(TestCase):
                              'person edit fail - incorrect data'
         )
 
-        
+
 #Ticket12
 class LogTest(TestCase):
-    def get_logs(self):
+    def test_logs(self):
         response = self.client.get('/loglist/?secret_pattern=secret_pattern')
-        self.failIfEqual(response.content.find('secret_pattern'), -1, 'query not logged')
-        
+        self.failIfEqual(response.content.find('secret_pattern'),
+                         -1,
+                         'query not logged'
+        )
+
+
 #Ticket13
 class LogOrderTest(TestCase):
     def get_logs(self):
         #make 2 queries
-        response = self.client.get('/loglist/?order=id')              
+        response = self.client.get('/loglist/?order=id')
         response = self.client.get('/loglist/?order=id')
         #Fine ID position on page
         ID_1_pos = response.content.find("<td>1</td>")
