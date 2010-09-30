@@ -9,11 +9,12 @@ import settings
 # Create the form class.
 class PersonForm(ModelForm):
     birthdate = forms.DateField(widget=AdminDateWidget())
-    
-    def __init__(self, *args, **kw): 
+
+    def __init__(self, *args, **kw):
         super(ModelForm, self).__init__(*args, **kw)
-        self.fields.keyOrder.reverse() 
-            class Meta:
+        self.fields.keyOrder.reverse()
+
+    class Meta:
         model = Person
         js = ('/admin/jsi18n/',
               settings.ADMIN_MEDIA_PREFIX + 'js/core.js',

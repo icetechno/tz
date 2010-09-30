@@ -92,21 +92,22 @@ class DateWidgetTest(TestCase):
         # checkign JavaScript block CRC
         rendered_data = template.nodelist[0].blocks['js'].render(c)
         encoded_data = unicode(rendered_data).encode('utf-8')
-        #-0x1d02e87b   
+        #-0x1d02e87b  
         self.failUnlessEqual(crc32(encoded_data),
-                    -0xac22570,
+                    - 0xac22570,
                     'JavaScript code required by widget loaded incorrect')
 
 
 #Ticket7
 class ReverseTest(TestCase):
-    def check_ifreversed(self):
+    def test_ifreversed(self):
         first_person = Person.objects.all()[0]
-        form = PersonForm(instance = first_person)
+        form = PersonForm(instance=first_person)
         rendered_data = form.as_table()
         birthdate_pos = rendered_data.find("id_birthdate")
         name_pos = rendered_data.find("id_name")
         self.failUnless(birthdate_pos < name_pos, 'Fields are not reversed')
+
 
 #Ticket8
 class CustomTagTest(TestCase):
