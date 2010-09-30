@@ -6,11 +6,13 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    (r'^$', index),                       
+    (r'^$', index),
     (r'^admin/', include(admin.site.urls)),
     (r'^accounts/login/$', 'django.contrib.auth.views.login'),
     (r'^logout/$', logout_user),
     (r'^settings/$', settings),
-    (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': django_settings.MEDIA_ROOT}),    
+    (r'^site_media/(?P<path>.*)$',
+        'django.views.static.serve',
+        {'document_root': django_settings.MEDIA_ROOT}),
     (r'^edit/$', edit_person),
 )
