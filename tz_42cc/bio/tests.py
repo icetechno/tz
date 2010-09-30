@@ -6,7 +6,7 @@ from models import Person
 class BioTest(TestCase):
     fixtures = ['initial_data.json', ]   # my fixtures
 
-    def simpleTest(self):
+    def test_simpleTest(self):
         response = self.client.get('/')
         # Check that the response is 200 OK.
         self.failUnlessEqual(response.status_code, 200)
