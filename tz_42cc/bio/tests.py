@@ -125,8 +125,7 @@ class CustomTagTest(TestCase):
             -1,
             'custom tag render error'
         )
- 
-  
+
 #Ticket9
 class CommandTest(TestCase):
     def test_mycommand_failure(self):
@@ -136,11 +135,13 @@ class CommandTest(TestCase):
         new_io = cStringIO.StringIO()
         #execute my command and put out into my buffer
         management.call_command('models_count', stdout=new_io)
-        #get buffer value         
+        #get buffer value
         command_output = new_io.getvalue()
-        #set up test condition 
-        self.failUnless(command_output.count("<class") > MODELS_MIN, 'models list are too small')
-         
+        #set up test condition
+        self.failUnless(command_output.count("<class") > MODELS_MIN,
+                'models list are too small')
+
+ 
 #Ticket10
 class SignalTest(TestCase):
     def test_all(self):
