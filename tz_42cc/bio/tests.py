@@ -22,14 +22,19 @@ class BioTest(TestCase):
         self.failIfEqual(response.content.find('0974865577'),
                           -1,
                          'data pattern not found in response')
-        
+
+
 #Ticket3
 class HttpRequestLogTest(TestCase):
-    def loopback(self):
+    def test_loopback(self):
         self.client.get('/?key=value')
-        log_data_obj = HttpRequestData.objects.filter(path = '/')
-        self.failIf(log_data_obj.count() == 0, 'http requests not stored in the DB')
-        self.failUnlessEqual(log_data_obj[0].request, u"<QueryDict: {u'key': [u'value']}>", 'http requests data not stored in the DB correctly')
+        log_data_obj = HttpRequestData.objects.filter(path='/')
+        self.failIf(log_data_obj.count() == 0,
+                    'http requests not stored in the DB')
+        self.failUnlessEqual(log_data_obj[0].request,
+                    u"<QueryDict: {u'key': [u'value']}>",
+                    'http requests data not stored in the DB correctly')
+
 
 #Ticket4
 class ContextProcessorTest(TestCase):
@@ -178,4 +183,3 @@ class LogOrderTest(TestCase):
         ID_1_pos = response.content.find("<td>1</td>")
         ID_2_pos = response.content.find("<td>2</td>")
         self.failUnless(ID_1_pos > ID_2_pos, 'Logs displayed incorrectly')
-        

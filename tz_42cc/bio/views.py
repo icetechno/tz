@@ -22,6 +22,7 @@ def index(request):
                         {'person': person_data},
                         context_instance=RequestContext(request))
 
+
 def settings(request):
     context = RequestContext(request, {}, [get_settings])
     return render_to_response('settings.html', context_instance = context)

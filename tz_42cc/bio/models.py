@@ -3,6 +3,7 @@ from django.db import models
 #imports for signal dispatcher
 from django.db.models.signals import post_init, post_save, post_delete
 from django.contrib.contenttypes.models import ContentType
+from datetime import datetime
 
 
 #That class represents a person
@@ -22,17 +23,18 @@ class Person(models.Model):
     def __unicode__(self):
         return u'%s %s' % (self.name, self.surname)
 
+
 class HttpRequestData(models.Model):
-    path =  models.TextField()
-    method = models.CharField(max_length = 5)
+    path = models.TextField()
+    method = models.CharField(max_length=5)
     request = models.TextField()
-    cookies = models.TextField(blank = True) 
+    cookies = models.TextField(blank=True)
     meta = models.TextField()
-    user = models.TextField(blank = True)
-    date = models.DateTimeField(auto_now_add = True)
+    user = models.TextField(blank=True)
+    date = models.DateTimeField(default=datetime.now)
 
     def __unicode__(self):
-        return u'%s %s' % (self.path, self.request)    
+        return u'%s %s' % (self.path, self.request)   
     
 class SignalLog(models.Model):
     souce = models.CharField(max_length = 254)
