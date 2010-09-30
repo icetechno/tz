@@ -47,6 +47,21 @@ class ContextProcessorTest(TestCase):
 #Ticket5
 class EditTest(TestCase):
     def test_change(self):
+        #login
+        username = 'root'
+        password = '111111'
+        login_path = '/accounts/login/'
+        user = User.objects.create_user(username, 'vasya@mail.ru', password)
+        user.save()
+        response = self.client.get(login_path)
+        token = response.context['csrf_token']
+        response = self.client.post(login_path, {'username': username,
+                                                 'password': password,
+                                                 'csrfmiddlewaretoken': token})
+        self.failUnlessEqual(response.status_code,
+                             302,
+                            'person edit fail - login failed')
+        #change data
         person = Person.objects.all()[0]    # get person for save
         target_path = '/edit/'
         response = self.client.get(target_path)

@@ -38,15 +38,16 @@ def edit_person(request):
         if form.is_valid():  # if form data are valid
             form.save()      # save data from object to DB
         else:  # form data not valid
-            return render_to_response('bio/edit_error.html')        
-    return render_to_response('bio/edit.html', 
-                              {'form': form}, 
-                              context_instance = RequestContext(request))
+            return render_to_response('bio/edit_error.html')
+    return render_to_response('bio/edit.html',
+                              {'form': form},
+                              context_instance=RequestContext(request))
 
 
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect('/')
+
 
 def loglist(request):
     if request.REQUEST.has_key('order'):
