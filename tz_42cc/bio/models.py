@@ -35,28 +35,32 @@ class HttpRequestData(models.Model):
 
     def __unicode__(self):
         return u'%s %s' % (self.path, self.request)   
-    
+
+
 class SignalLog(models.Model):
-    souce = models.CharField(max_length = 254)
-    type = models.CharField(max_length = 15)
-    
+    souce = models.CharField(max_length=254)
+    type = models.CharField(max_length=15)
+
     def __unicode__(self):
-        return u'%s %s' % (self.type, self.souce)     
-    
+        return u'%s %s' % (self.type, self.souce)
+
+
 def my_callback(sender, **kwargs):
-    if sender == SignalLog:             #don`t log self
+    if sender == SignalLog:             # don`t log self
         return
-    elif sender == ContentType:           #dont fail django test
+    elif sender == ContentType:           # dont fail django test
         return
-    
+
     try:
-        signal = kwargs.get('signal')   #get signal from kwargs arguments
-        action = signal.__dict__['receivers'][0][0][0]  #get dispatch_uid if present
+        # get signal from kwargs arguments
+        signal = kwargs.get('signal')
+        # get dispatch_uid if present
+        action = signal.__dict__['receivers'][0][0][0]
     except:
-        action = 'can`t detect'        
-    signal_log = SignalLog(souce = str(sender), type = action)
-    signal_log.save()    
-    
+        action = 'can`t detect'
+    signal_log = SignalLog(souce=str(sender), type=action)
+    signal_log.save()
+
 post_init.connect(my_callback, dispatch_uid='init')
 post_save.connect(my_callback, dispatch_uid='save')
 post_delete.connect(my_callback, dispatch_uid='delete')

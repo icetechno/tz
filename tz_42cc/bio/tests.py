@@ -141,7 +141,7 @@ class CommandTest(TestCase):
         self.failUnless(command_output.count("<class") > MODELS_MIN,
                 'models list are too small')
 
- 
+
 #Ticket10
 class SignalTest(TestCase):
     def test_all(self):
@@ -151,8 +151,12 @@ class SignalTest(TestCase):
         first_person.name = 'test'
         first_person.save()
         first_person.delete()
-        for action in actions:                    
-            self.failUnless(SignalLog.objects.filter(type = action, souce = target_class), '%s action not found in logs' % action)
+        for action in actions:
+            self.failUnless(
+                SignalLog.objects.filter(type=action, souce=target_class),
+                '%s action not found in logs' % action
+            )
+
 
 #Ticket11
 class JqueryTest(TestCase):
