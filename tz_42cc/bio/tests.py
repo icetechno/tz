@@ -9,16 +9,19 @@ from model_form import PersonForm
 from django.core import management
 import cStringIO
 
+
 #Ticket1
 class BioTest(TestCase):
-    fixtures = ['initial_data.json',]   #my fixtures
-            
-    def simpleTest(self):
+    fixtures = ['initial_data.json', ]   # my fixtures
+
+    def test_simpleTest(self):
         response = self.client.get('/')
         # Check that the response is 200 OK.
         self.failUnlessEqual(response.status_code, 200)
         # find data pattern
-        self.failIfEqual(response.content.find('0974865577'), -1, 'data pattern not found in response')
+        self.failIfEqual(response.content.find('0974865577'),
+                          -1,
+                         'data pattern not found in response')
         
 #Ticket3
 class HttpRequestLogTest(TestCase):
@@ -175,3 +178,4 @@ class LogOrderTest(TestCase):
         ID_1_pos = response.content.find("<td>1</td>")
         ID_2_pos = response.content.find("<td>2</td>")
         self.failUnless(ID_1_pos > ID_2_pos, 'Logs displayed incorrectly')
+        
