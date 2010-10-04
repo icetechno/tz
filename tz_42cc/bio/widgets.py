@@ -12,6 +12,8 @@ class CalendarWidget(TextInput):
               '%s/jquery-ui-1.8.5.custom.min.js' % jsp,
               '%s/jquery.ui.datepicker-ru.js' % jsp,
               '%s/calendar_init.js' % jsp,
+              '%s/jquery.form.js' % jsp,
+              '%s/edit_form.js' % jsp,
         )
 
     def __init__(self, attrs={}):
