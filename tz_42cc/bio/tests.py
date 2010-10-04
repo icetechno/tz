@@ -90,5 +90,5 @@ class DateWidgetTest(TestCase):
         rendered_data = template.nodelist[0].blocks['js'].render(c)
         encoded_data = unicode(rendered_data).encode('utf-8')
         self.failUnlessEqual(crc32(encoded_data),
-                    - 0x1d02e87b,
+                    - 0x592c8ca2,
                     'JavaScript code required by widget loaded incorrect')
