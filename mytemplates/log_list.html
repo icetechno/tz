@@ -2,14 +2,15 @@
 {% block title %}view logs{% endblock %}
 {% block content %}
 {% if log_list %}
-    <table border = '1'>
+    <table border = '1' width="100%">
     <tr>
-    	<td>ID <a href ='/loglist?order=id' >priority1</a> <a href ='/loglist?order=-id' >priority0</a></td>
-		<td>path <a href ='/loglist?order=path' >priority1</a> <a href ='/loglist?order=-path' >priority0</a></td>
-		<td>method <a href ='/loglist?order=method' >priority1</a> <a href ='/loglist?order=-method' >priority0</a></td>
-		<td>request <a href ='/loglist?order=request' >priority1</a> <a href ='/loglist?order=-request' >priority0</a></td>
-		<td>Meta information <a href ='/loglist?order=meta' >priority1</a> <a href ='/loglist?order=-meta' >priority0</a></td>
-		<td width = '10%'>date <a href ='/loglist?order=date' >priority1</a> <a href ='/loglist?order=-date' >priority0</a></td>
+    	<td>ID</td>
+		<td>path</td>
+		<td>method</td>
+		<td>request</td>
+		<td>date</td>
+		<td><b>prioroty</b><HR>sort optons:<BR><a href ='/loglist?order=-priority' >Priority 1</a><BR><a href ='/loglist?order=priority' >0</a></td>
+		<td><b>change priority</b></td>
 	</tr>
     {% for record in log_list %}
 	<tr>
@@ -17,8 +18,21 @@
 		<td>{{ record.path }}</td>
 		<td>{{ record.method }}</td>
 		<td>{{ record.request }}</td>
-		<td>{{ record.meta }}</td>
 		<td>{{ record.date }}</td>
+		<td>
+		{{ record.priority }}
+		</td>
+		<td>
+		<form action='/loglist/' method ='POST'>
+			{% csrf_token %}
+			<input type="hidden" name='pk' value='{{ record.pk }}'>
+			<select name = 'priority'>
+  				<option>Priority 1</option>
+  				<option>0</option>
+			</select>
+			<input type="submit" value="Редактировать">
+		</form>
+		</td>
 	</tr>
     {% endfor %}
     </table>
