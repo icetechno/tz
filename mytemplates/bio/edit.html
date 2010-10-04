@@ -1,15 +1,8 @@
 {% extends "base_generic.html" %}
 {% block title %}edit page{% endblock %} 
 	{% block js %}
-		<script type="text/javascript">window.__admin_media_prefix__ = "/media/";</script>	   
-   		<script type="text/javascript" src="/admin/jsi18n/"></script>
-		<script type="text/javascript" src="/media/js/core.js"></script>
-		<script type="text/javascript" src="/media/js/calendar.js"></script>
-		<script type="text/javascript" src="/media/js/admin/DateTimeShortcuts.js"></script>
-		<script type="text/javascript" src="/site_media/js/jquery-1.4.2.min.js"></script>
-    	<script type="text/javascript" src="/site_media/js/jquery.form.js"></script>
-    	<script type="text/javascript" src="/site_media/js/edit_form.js"></script> 
-	{% endblock %} 
+		{{ form.media }}
+	{% endblock %}
 {% block content %}
 <div id='output1'>
 <h3 style="margin-top: 50px">edit person</h3>

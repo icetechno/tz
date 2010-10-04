@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import *
+
 from django.conf import settings as django_settings
 from bio.views import index, settings, edit_person, logout_user, loglist
 
@@ -17,4 +18,7 @@ urlpatterns = patterns('',
         'django.views.static.serve',
         {'document_root': django_settings.MEDIA_ROOT}),
     (r'^edit/$', edit_person),
+    (r'^site_media/(?P<path>.*)$',
+        'django.views.static.serve',
+        {'document_root': django_settings.MEDIA_ROOT}),
 )
