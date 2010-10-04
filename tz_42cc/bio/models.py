@@ -25,6 +25,12 @@ class Person(models.Model):
 
 
 class HttpRequestData(models.Model):
+
+    PRIORITY_CHOICES = (
+        ('0', '0'),
+        ('1', 'Priority 1'),
+    )
+
     path = models.TextField()
     method = models.CharField(max_length=5)
     request = models.TextField()
@@ -32,6 +38,10 @@ class HttpRequestData(models.Model):
     meta = models.TextField()
     user = models.TextField(blank=True)
     date = models.DateTimeField(default=datetime.now)
+    priority = models.CharField(max_length=1,
+                            choices=PRIORITY_CHOICES,
+                            default='0',
+    )
 
     def __unicode__(self):
         return u'%s %s' % (self.path, self.request)

@@ -200,16 +200,21 @@ class LogTest(TestCase):
 #Ticket13
 class LogOrderTest(TestCase):
     def test_logs(self):
-        #make 2 queries
-        response = self.client.get('/loglist/?order=id')
-        response = self.client.get('/loglist/?order=id')
-        #Fine ID position on page
-        ID_1_pos = response.content.find("<td>1</td>")
-        ID_2_pos = response.content.find("<td>2</td>")
-        self.failUnless(ID_1_pos < ID_2_pos, 'Logs displayed incorrectly')
-        #make query where order is revered
-        response = self.client.get('/loglist/?order=-id')
-        #Fine ID position on page
-        ID_1_pos = response.content.find("<td>1</td>")
-        ID_2_pos = response.content.find("<td>2</td>")
-        self.failUnless(ID_1_pos > ID_2_pos, 'Logs displayed incorrectly')
+        #make query
+        target_path = '/loglist/'
+        response = self.client.get(target_path)
+        token = response.context['csrf_token']
+        first_record = HttpRequestData.objects.get(pk=1)
+        #Test if record exist and has default value
+        self.failUnlessEqual(first_record.priority,
+                             HttpRequestData.PRIORITY_CHOICES[0][0],
+                             'Log entry has wrong default priority value')
+        response = self.client.post(target_path,
+                            {'pk': '1',
+                            'priority': '1',
+                            }
+        )
+        first_record = HttpRequestData.objects.get(pk=1)
+        self.failUnlessEqual(first_record.priority,
+                             HttpRequestData.PRIORITY_CHOICES[1][0],
+                             'Change priority failed')

@@ -69,3 +69,22 @@ def test_tag(request):
     return render_to_response('test_tag.html',
                               {'request': request},
                               context_instance=RequestContext(request))
+
+
+def loglist(request):
+    if request.method == 'POST':
+        record = HttpRequestData.objects.get(pk=request.REQUEST['pk'])
+        record.priority = request.REQUEST['priority']
+        record.save()
+        redirect_to = request.META['HTTP_REFERER'] if \
+                        'HTTP_REFERER' in request.META else '/loglist/'
+        return HttpResponseRedirect(redirect_to)
+
+    if 'order' in request.REQUEST:
+        order = request.REQUEST['order']
+        log_list = HttpRequestData.objects.order_by(order)[:10]
+    else:
+        log_list = HttpRequestData.objects.all()[:10]
+    return render_to_response('log_list.html',
+                              {'log_list': log_list},
+                              context_instance=RequestContext(request))
