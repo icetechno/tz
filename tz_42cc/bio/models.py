@@ -24,12 +24,17 @@ class Person(models.Model):
         return u'%s %s' % (self.name, self.surname)
 
 
+def get_choices():
+    result = tuple()
+    for i in range(0, 10):
+        result += (i, 'Priority %d' % (i + 1)),
+
+    return result
+
+
 class HttpRequestData(models.Model):
 
-    PRIORITY_CHOICES = (
-        (None, ''),
-        (0, 'Priority 1'),
-    )
+    PRIORITY_CHOICES = get_choices()
 
     path = models.TextField()
     method = models.CharField(max_length=5)
@@ -39,12 +44,11 @@ class HttpRequestData(models.Model):
     user = models.TextField(blank=True)
     date = models.DateTimeField(default=datetime.now)
     priority = models.IntegerField(choices=PRIORITY_CHOICES,
-                            blank=True,
-                            null=True,
+                            default=0,
     )
 
     def __unicode__(self):
-        return u'%s %s' % (self.path, self.request)
+        return u'%s %s' % (self.path, self.request, self.priority)
 
 
 class SignalLog(models.Model):

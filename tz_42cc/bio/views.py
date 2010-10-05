@@ -73,12 +73,8 @@ def test_tag(request):
 
 def loglist(request):
     if request.method == 'POST':
-        reversed_choice = {
-            'Priority 1': 0,
-            '': None,
-        }
         record = HttpRequestData.objects.get(pk=request.REQUEST['pk'])
-        record.priority = reversed_choice[request.REQUEST['priority']]
+        record.priority = int(request.REQUEST['priority'][9]) - 1
         record.save()
         redirect_to = request.META['HTTP_REFERER'] if \
                         'HTTP_REFERER' in request.META else '/loglist/'
@@ -90,5 +86,8 @@ def loglist(request):
     else:
         log_list = HttpRequestData.objects.all()[:10]
     return render_to_response('log_list.html',
-                              {'log_list': log_list},
-                              context_instance=RequestContext(request))
+                                {
+                                 'log_list': log_list,
+                                 'range': range(1, 10),
+                                },
+                                context_instance=RequestContext(request))
