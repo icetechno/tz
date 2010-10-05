@@ -64,8 +64,12 @@ def test_tag(request):
 
 def loglist(request):
     if request.method == 'POST':
+        reversed_choice = {
+            'Priority 1': 0,
+            '': None,
+        }
         record = HttpRequestData.objects.get(pk=request.REQUEST['pk'])
-        record.priority = request.REQUEST['priority']
+        record.priority = reversed_choice[request.REQUEST['priority']]
         record.save()
         redirect_to = request.META['HTTP_REFERER'] if \
                         'HTTP_REFERER' in request.META else '/loglist/'

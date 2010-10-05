@@ -206,11 +206,11 @@ class LogOrderTest(TestCase):
         first_record = HttpRequestData.objects.get(pk=1)
         #Test if record exist and has default value
         self.failUnlessEqual(first_record.priority,
-                             HttpRequestData.PRIORITY_CHOICES[0][0],
+                             None,
                              'Log entry has wrong default priority value')
         response = self.client.post(target_path,
                             {'pk': '1',
-                            'priority': '1',
+                            'priority': 'Priority 1',
                             }
         )
         first_record = HttpRequestData.objects.get(pk=1)
