@@ -27,8 +27,9 @@
 			{% csrf_token %}
 			<input type="hidden" name='pk' value='{{ record.pk }}'>
 			<select name = 'priority'>
-  				<option>Priority 1</option>
-  				<option></option>
+			{% for i in range %}
+  				<option>Priority {{ i }}</option>
+			{% endfor %}
 			</select>
 			<input type="submit" value="Редактировать">
 		</form>
