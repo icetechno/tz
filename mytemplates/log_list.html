@@ -9,7 +9,7 @@
 		<td>method</td>
 		<td>request</td>
 		<td>date</td>
-		<td><b>prioroty</b><HR>sort optons:<BR><a href ='/loglist?order=-priority' >Priority 1</a><BR><a href ='/loglist?order=priority' >0</a></td>
+		<td><b>prioroty</b><HR>sort optons:<BR><a href ='/loglist?order=-priority' >Priority 1</a><BR><a href ='/loglist?order=priority' >empty</a></td>
 		<td><b>change priority</b></td>
 	</tr>
     {% for record in log_list %}
@@ -20,7 +20,7 @@
 		<td>{{ record.request }}</td>
 		<td>{{ record.date }}</td>
 		<td>
-		{{ record.priority }}
+			{{ record.get_priority_display }}
 		</td>
 		<td>
 		<form action='/loglist/' method ='POST'>
@@ -28,7 +28,7 @@
 			<input type="hidden" name='pk' value='{{ record.pk }}'>
 			<select name = 'priority'>
   				<option>Priority 1</option>
-  				<option>0</option>
+  				<option></option>
 			</select>
 			<input type="submit" value="Редактировать">
 		</form>

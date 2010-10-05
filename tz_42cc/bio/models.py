@@ -27,8 +27,8 @@ class Person(models.Model):
 class HttpRequestData(models.Model):
 
     PRIORITY_CHOICES = (
-        ('0', '0'),
-        ('1', 'Priority 1'),
+        (None, ''),
+        (0, 'Priority 1'),
     )
 
     path = models.TextField()
@@ -38,9 +38,9 @@ class HttpRequestData(models.Model):
     meta = models.TextField()
     user = models.TextField(blank=True)
     date = models.DateTimeField(default=datetime.now)
-    priority = models.CharField(max_length=1,
-                            choices=PRIORITY_CHOICES,
-                            default='0',
+    priority = models.IntegerField(choices=PRIORITY_CHOICES,
+                            blank=True,
+                            null=True,
     )
 
     def __unicode__(self):
