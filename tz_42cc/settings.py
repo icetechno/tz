@@ -87,13 +87,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'tz_42cc.urls'
 
 TEMPLATE_DIRS = (
-os.path.abspath(
-        os.path.join(
-            os.path.dirname(
-                os.path.join(os.path.abspath(__file__), '../../..')
-            ),
-            "mytemplates")
-    ),
+    'templates',
 )
 
 INSTALLED_APPS = (

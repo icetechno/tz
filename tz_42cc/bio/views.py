@@ -38,8 +38,6 @@ def edit_person(request):
         form = PersonForm(request.POST, instance=first_person)
         if form.is_valid():  # if form data are valid
             form.save()      # save data from object to DB
-        else:  # form data not valid
-            return render_to_response('bio/edit_error.html')
     return render_to_response('bio/edit.html',
                               {'form': form},
                               context_instance=RequestContext(request))
