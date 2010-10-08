@@ -4,16 +4,14 @@
 		{{ form.media }}
 	{% endblock %}
 {% block content %}
-<div id='output1'>
 <h3 style="margin-top: 50px">edit person</h3>
-<form id='editForm' action="/edit/" method="POST">{% csrf_token %}
+<form id="editForm" action="/edit/" method="POST">{% csrf_token %}
 	<table>
 		{{ form.as_table }}
 	</table>
-<p><input type="submit" value="Редактировать"></p>
+<input type="submit" value="Редактировать">
 </form>
-	<div id='progress' style="display: none">
-		<img src="/site_media/img/loader.gif">
-	</div>
-</div> 
+<div id="progress" style="display: none">
+	<img src="/site_media/img/loader.gif">
+</div>
 {% endblock %}
