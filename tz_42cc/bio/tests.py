@@ -74,12 +74,9 @@ class EditTest(TestCase):
                 }
         response = self.client.post(target_path, data)
         person.save()   # Re-write initial data
-        response_name = ''
-        try:
-            response_name = response.context['form']['name'].data
-        except:
-            self.assertTrue(False, "person edit fail - incorrect response")
-        self.failUnlessEqual(response_name, data['name'],
+        res = str(response)
+        self.failIfEqual(res.find(data['name']),
+                             -1,
                              'person edit fail - incorrect data')
 
 
@@ -181,8 +178,10 @@ class JqueryTest(TestCase):
                             'birthdate': '1983-06-24',
                             'csrfmiddlewaretoken': token, })
         person.save()
-        self.failUnlessEqual(response.context['form']['name'].data,
-                             'john',
+        
+        res = str(response)
+        self.failIfEqual(res.find('john'),
+                             -1,
                              'person edit fail - incorrect data'
         )
 

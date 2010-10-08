@@ -3,7 +3,7 @@ from models import Person, HttpRequestData
 from model_form import PersonForm
 from django.template import RequestContext
 from django.contrib.auth import logout
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from context_processor import get_settings
 from django.contrib.auth.decorators import login_required
 
@@ -37,7 +37,8 @@ def edit_person(request):
         # load post data into object
         form = PersonForm(request.POST, instance=first_person)
         if form.is_valid():  # if form data are valid
-            form.save()      # save data from object to DB
+            form.save()      # save data from object to DB                            
+        return HttpResponse(form.ajax_response())
     return render_to_response('bio/edit.html',
                               {'form': form},
                               context_instance=RequestContext(request))
