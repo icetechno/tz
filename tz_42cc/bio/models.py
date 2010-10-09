@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 from django.db import models
 #imports for signal dispatcher
 from django.db.models.signals import post_init, post_save, post_delete
 from django.contrib.contenttypes.models import ContentType
-from datetime import datetime
 
 
 #That class represents a person

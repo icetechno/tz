@@ -1,4 +1,4 @@
-from tz_42cc.bio.models import HttpRequestData
+from models import HttpRequestData
 
 
 class LogHttpRequest:

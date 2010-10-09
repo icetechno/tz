@@ -1,13 +1,15 @@
-from django.test import TestCase
-from models import Person, HttpRequestData, SignalLog
+import cStringIO
 from zlib import crc32
+
+from django.test import TestCase
+from django.core import management
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.template.loader import get_template
 from django.template import Context
+
 from model_form import PersonForm
-from django.core import management
-import cStringIO
+from models import Person, HttpRequestData, SignalLog
 
 
 #Ticket1
@@ -178,7 +180,7 @@ class JqueryTest(TestCase):
                             'birthdate': '1983-06-24',
                             'csrfmiddlewaretoken': token, })
         person.save()
-        
+
         res = str(response)
         self.failIfEqual(res.find('john'),
                              -1,
