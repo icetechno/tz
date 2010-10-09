@@ -1,41 +1,42 @@
 {% extends "base_generic.html" %}
-{% block title %}view logs{% endblock %}
+{% block title %}view logs{% endblock%}
 {% block content %}
 {% if log_list %}
-    <table border = '1' width="100%">
-    <tr>
-    	<td>ID</td>
-		<td>path</td>
-		<td>method</td>
-		<td>request</td>
-		<td>date</td>
-		<td><b>prioroty</b><HR>sort optons:<BR><a href ='/loglist?order=-priority' >Priority 1</a><BR><a href ='/loglist?order=priority' >empty</a></td>
-		<td><b>change priority</b></td>
-	</tr>
-    {% for record in log_list %}
-	<tr>
-		<td>{{ record.pk }}</td>
-		<td>{{ record.path }}</td>
-		<td>{{ record.method }}</td>
-		<td>{{ record.request }}</td>
-		<td>{{ record.date }}</td>
-		<td>
-			{{ record.get_priority_display }}
-		</td>
-		<td>
-		<form action='/loglist/' method ='POST'>
-			{% csrf_token %}
-			<input type="hidden" name='pk' value='{{ record.pk }}'>
-			<select name = 'priority'>
-			{% for i in range %}
-  				<option>Priority {{ i }}</option>
-			{% endfor %}
-			</select>
-			<input type="submit" value="Редактировать">
-		</form>
-		</td>
-	</tr>
-    {% endfor %}
+    <table border='1' width="100%">
+        <tr>
+            <td>ID</td>
+            <td>path</td>
+            <td>method</td>
+            <td>request</td>
+            <td>date</td>
+            <td><b> prioroty </b>
+            <HR>
+            sort optons: <BR>
+            <a href='/loglist?order=-priority'> Priority 1 </a> <BR>
+            <a href='/loglist?order=priority'> empty </a></td>
+            <td><b> change priority </b></td>
+         </tr>
+        {% for record in log_list %}
+         <tr>
+            <td>{{ record.pk }}</td>
+            <td>{{ record.path }}</td>
+            <td>{{ record.method }}</td>
+            <td>{{ record.request }}</td>
+            <td>{{ record.date }}</td>
+            <td>{{ record.get_priority_display }}</td>
+            <td>
+            <form action='/loglist/' method='POST'>{% csrf_token %}
+                <input type="hidden" name='pk' value='{{ record.pk }}'>
+                <select name='priority'>
+                {% for i in range %}
+                    <option>Priority {{ i }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" value="Редактировать">
+            </form>
+            </td>
+        </tr>
+        {% endfor %}
     </table>
 {% else %}
     <p>no logs found</p>

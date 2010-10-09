@@ -1,19 +1,16 @@
-{% extends "base_generic.html" %}
-{% block title %}
-	template-context-processor
-{% endblock %}
-{% block content %} 
-django settings
+{% extends "base_generic.html" %} {% block title %}
+template-context-processor {% endblock %} {% block content %} django
+settings
 <table border=1>
-	<tr>
-		<td><b>Setting</b></td>
-		<td><b>Value</b></td>
-	</tr>
-	{% for setting, val in settings.items %}
-	<tr>
-		<td>{{ setting }}</td>
-		<td>{{ val }}</td>
-	</tr>
-	{% endfor %}
+    <tr>
+        <td><b> Setting </b></td>
+        <td><b> Value </b></td>
+    </tr>
+    {% for setting, val in settings.items %}
+        <tr>
+            <td>{{ setting }}</td>
+            <td>{{ val }}</td>
+        </tr>
+    {% endfor %}
 </table>
 {% endblock %}

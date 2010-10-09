@@ -94,7 +94,7 @@ class DateWidgetTest(TestCase):
         #for debug
         #print hex(crc32(encoded_data))
         self.failUnlessEqual(crc32(encoded_data),
-                    - 0x592c8ca2,
+                    - 0x10cce96b,
                     'JavaScript code required by widget loaded incorrect')
 
 

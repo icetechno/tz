@@ -1,19 +1,20 @@
 {% extends "base_generic.html" %}
-{% block title %}edit page{% endblock %} 
-	{% block js %}
-		{{ form.media }}
-	{% endblock %}
+{% block title %}edit page{% endblock %}
+{% block js %} {{ form.media }} {% endblock%}
 {% block content %}
 <div>
-<h3 style="margin-top: 50px">edit person</h3>
+    <h3 style="margin-top: 50px">
+    edit person
+    </h3>
 </div>
-<form id="editForm1" action="/edit/" method="POST">{% csrf_token %}
-	<table>
-		{{ form.as_table }}
-	</table>
-<input type="submit" value="Редактировать">
+<form id="editForm1" action="/edit/" method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Редактировать">
 </form>
 <div id="progress" style="display: none">
-	<img src="/site_media/img/loader.gif">
+    <img src="/site_media/img/loader.gif">
 </div>
 {% endblock %}
