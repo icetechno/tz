@@ -1,5 +1,5 @@
-from django.conf.urls.defaults import *
 from django.conf import settings as django_settings
+from django.conf.urls.defaults import *
 from django.contrib import admin
 
 from bio.views import index, settings, edit_person, logout_user, loglist

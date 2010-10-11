@@ -1,12 +1,12 @@
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.contrib.auth import logout
-from django.http import HttpResponseRedirect, HttpResponse
-from context_processor import get_settings
-from django.contrib.auth.decorators import login_required
 
+from context_processor import get_settings
+from forms import PersonForm
 from models import Person, HttpRequestData
-from model_form import PersonForm
 
 
 def index(request):
@@ -37,9 +37,11 @@ def edit_person(request):
     if request.method == 'POST':  # recived post data to save
         # load post data into object
         form = PersonForm(request.POST, instance=first_person)
+        sucsess_text = 'form data not saved'
         if form.is_valid():  # if form data are valid
             form.save()      # save data from object to DB
-        return HttpResponse(form.ajax_response())
+            sucsess_text = 'data saved'
+        return HttpResponse(form.ajax_response(sucsess_text))
     return render_to_response('bio/edit.html',
                               {'form': form},
                               context_instance=RequestContext(request))

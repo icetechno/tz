@@ -1,14 +1,15 @@
 import cStringIO
 from zlib import crc32
 
-from django.test import TestCase
-from django.core import management
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.template.loader import get_template
-from django.template import Context
+from django.core import management
 
-from model_form import PersonForm
+from django.template import Context
+from django.template.loader import get_template
+from django.test import TestCase
+
+from forms import PersonForm
 from models import Person, HttpRequestData, SignalLog
 
 
