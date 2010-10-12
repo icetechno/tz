@@ -2,5 +2,14 @@
 /* Edit Form
 ----------------------------------*/
 .edit_caption { margin-top: 50px; }
-.progress_bar { display: none; }
-.save_result { color: #000000; border: 1px solid #e78f08; background: #f6a828; width: 240px;}
+.progress_bar {
+    display: none;
+    background-image: url('/site_media/img/loader.gif');
+    background-repeat: no-repeat;
+}
+.save_result {
+    color: #000000;
+    border: 1px solid #e78f08;
+    background: #f6a828;
+    width: 240px;
+}
